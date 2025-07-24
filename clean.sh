@@ -1,0 +1,1 @@
+docker kill testapi && docker rm testapi && docker rmi api

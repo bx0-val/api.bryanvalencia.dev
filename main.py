@@ -39,9 +39,10 @@ async def oplog(request: Request):
 
 @app.get("/commits", response_class=HTMLResponse)
 async def commits(request: Request):
+    token = os.getenv('GITHUB_TOKEN')
     headers = {
     'Accept': 'application/vnd.github+json',
-    'Authorization': f'Bearer {os.getenv('GITHUB_TOKEN')}',
+    'Authorization': f'Bearer {token}',
     'X-GitHub-Api-Version': '2022-11-28',
     }
 

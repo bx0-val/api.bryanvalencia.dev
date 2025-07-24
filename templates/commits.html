@@ -1,6 +1,18 @@
-<ul style="list-style: none;">
+<ul style="list-style: none; font-family: 'Courier New', Courier, monospace;">
     {% for item in data %}
-        <li><span>{{ item }}</span> - {{ item[0] }}</li>
+    <span style="font-style: italic; font-weight: 700; font-size: 18px;"><a target="_blank" href="https://github.com/bx0-val/{{ item }}">{{ item }}</a></span> 
+    <div style="margin-top: 10px; margin-left: 25px;">
+        {% for commit in data[item] %}
+        <li>
+            <span style="font-size: 14px;">{{ commit[3] }}</span>
+            - 
+            <span style="font-style:italic; font-weight: 900; font-size: 12px;">{{ commit[2] }}</span>
+            - 
+            <a target="_parent" href="{{ commit[0] }}" style="font-size: 12px;">({{ commit[1] }})</a>
+        </li>
+        <br>
+        {% endfor %}
+    </div>
     {% endfor %}
 </ul>
 
