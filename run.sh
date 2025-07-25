@@ -1,1 +1,1 @@
-docker run -p 80:80 --env-file=prod.env -d --name testapi api
+docker run -p 8080:80 --env-file=prod.env -d --name prodapi api

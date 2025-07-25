@@ -1,1 +1,1 @@
-docker kill testapi && docker rm testapi && docker rmi api
+docker kill prodapi && docker rm prodapi && docker rmi api
