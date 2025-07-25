@@ -1,14 +1,14 @@
 <ul style="list-style: none; font-family: 'Courier New', Courier, monospace;">
     {% for item in data %}
-    <span style="font-style: italic; font-weight: 700; font-size: 18px;"><a target="_blank" href="https://github.com/bx0-val/{{ item }}">{{ item }}</a></span> 
+    <span style="font-style: italic; font-weight: 700; font-size: 18px;"><a target="_blank" href="https://github.com/bx0-val/{{ item['name'] }}">{{ item['name'] }}</a></span> 
     <div style="margin-top: 10px; margin-left: 25px;">
-        {% for commit in data[item] %}
+        {% for commit in item['history']['target']['history']['nodes'] %}
         <li>
-            <span style="font-size: 14px;">{{ commit[3] }}</span>
+            <span style="font-size: 14px;">{{ commit['messageHeadline'] }}</span>
             - 
-            <span style="font-style:italic; font-weight: 900; font-size: 12px;">{{ commit[2] }}</span>
+            <span style="font-style:italic; font-weight: 900; font-size: 12px;">{{ commit['committedDate'] }}</span>
             - 
-            <a target="_parent" href="{{ commit[0] }}" style="font-size: 12px;">({{ commit[1] }})</a>
+            <a target="_parent" href="https://github.com/bx0-val/{{ item['name'] }}/commit/{{ commit['oid'] }}" style="font-size: 12px;">({{ commit['oid'][:7] }})</a>
         </li>
         <br>
         {% endfor %}
