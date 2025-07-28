@@ -1,13 +1,24 @@
-<div class="tab-list" role="tablist">
-	<button hx-get="https://api.bryanvalencia.dev/commits" role="tab" aria-selected="false" aria-controls="tab-content">commits</button>
-	<button hx-get="https://api.bryanvalencia.dev/oplog" class="selected" role="tab" aria-selected="true" aria-controls="tab-content">oplog</button>
+<div class="window active glass" style="width: 800px;">
+      <div class="title-bar">
+            <div class="title-bar-text">projects.exe</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Minimize"></button>
+                    <button aria-label="Close"></button>
+                </div>
+      </div>
+
+        <div class="window-body has-space" style="height: 600px; overflow: scroll;">
+            <menu class="tab-list" role="tablist">
+                <button hx-get="https://api.bryanvalencia.dev/commits" role="tab" aria-selected="false" aria-controls="tab-content">commits</button>
+                <button hx-get="https://api.bryanvalencia.dev/oplog" class="selected" role="tab" aria-selected="true" aria-controls="tab-content">oplog</button>
+            </menu>
+            <article role="tabpanel" style="min-height: 541px; overflow: scroll;">
+                // TODO  
+                <div role="progressbar" class="marquee" style="height: 10px; margin: auto;" ></div>
+            </article>
+        </div>
 </div>
 
-<div id="tab-content" role="tabpanel" class="tab-content">
-    <ul style="list-style: none;">
-        {% for item in data %}
-            <li><span>{{ item['date'] }}</span> - {{ item['text'] }}</li>
-        {% endfor %}
-    </ul>
-</div>
+
+
 

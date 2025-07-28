@@ -1,0 +1,7 @@
+<div class="poem" style="padding: 0px 20px; font-family: 'Courier New', Courier, monospace;">
+    <h5 style="font-size: 14px; font-weight: 900; text-align: start;">{{ data['title'] }}</h5>
+    {% for line in data['lines'] %}
+    <p style="font-size: 12px;">{{ line }}</p>
+    {% endfor %}
+    <h5 style="font-style: italic; text-align: end;">{{ data['poet'] }}, {{ data['year'] }}</h5>
+</div>

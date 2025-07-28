@@ -3,7 +3,9 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
-import xml.etree.ElementTree as ET
+# import xml.etree.ElementTree as ET
+import random
+import json
 import requests
 import os
 import asyncio
@@ -33,15 +35,7 @@ async def index(request: Request):
 
 @app.get("/oplog", response_class=HTMLResponse)
 async def oplog(request: Request):
-    tree = ET.parse("oplog/oplog.xml")
-    entries = tree.findall("entry")
-    entries_list = []
-    for entry in entries:
-        entries_list.append({'id': entry.attrib['id'],'text': entry.attrib['message'], 'date': entry.attrib['date']})
-
-    print(entries_list)
-    entries_list.reverse()
-    return templates.TemplateResponse(name="oplog.html", context={'request': request, 'data': entries_list})
+    return templates.TemplateResponse(name="oplog.html", context={'request': request})
 
 @app.get("/commits", response_class=HTMLResponse)
 async def commits(request: Request):
@@ -60,9 +54,11 @@ async def commits(request: Request):
     data=response.json()
     print(data['data']['viewer']['repositories']['nodes'])
 
-    # with open("graph.json", "w") as f:
-    #     f.write(response.text)
-
     return templates.TemplateResponse(name="commits.html", context={'request': request, 'data': data['data']['viewer']['repositories']['nodes']})
 
-# def request()
+@app.get("/poem", response_class=HTMLResponse)
+async def poem(request: Request):
+    with open("poems/poems.json", "r") as f:
+        poems = json.load(f)
+    data = random.choice(poems)
+    return templates.TemplateResponse(name="poem.html", context={'request': request, 'data': data})

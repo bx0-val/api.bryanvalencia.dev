@@ -1,25 +1,43 @@
-<div class="tab-list" role="tablist">
-	<button hx-get="https://api.bryanvalencia.dev/commits" class="selected" role="tab" aria-selected="true" aria-controls="tab-content">commits</button>
-	<button hx-get="https://api.bryanvalencia.dev/oplog" role="tab" aria-selected="false" aria-controls="tab-content">oplog</button>
+<div class="window active glass" style="width: 800px;">
+      <div class="title-bar">
+            <div class="title-bar-text">projects.exe</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Minimize"></button>
+                    <button aria-label="Close"></button>
+                </div>
+      </div>
+
+        <div class="window-body has-space" style="height: 600px; overflow: scroll;">
+            <menu class="tab-list" role="tablist">
+                <button hx-get="https://api.bryanvalencia.dev/commits" class="selected" role="tab" aria-selected="true" aria-controls="tab-content">commits</button>
+                <button hx-get="https://api.bryanvalencia.dev/oplog" role="tab" aria-selected="false" aria-controls="tab-content">oplog</button>
+            </menu>
+            <article role="tabpanel" style="min-height: 541px; overflow: scroll;">
+                <ul style="list-style: none; font-family: 'Courier New', Courier, monospace;">
+                    {% for item in data %}
+                    <details open>
+                    <summary>
+                        <span style="font-style: italic; font-weight: 700; font-size: 18px;"><a target="_blank" href="https://github.com/bx0-val/{{ item['name'] }}">{{ item['name'] }}</a></span> 
+                    </summary>
+                        <div style="margin-top: 10px; margin-left: 25px;">
+                            {% for commit in item['history']['target']['history']['nodes'] %}
+                            <li>
+                                <span style="font-size: 14px;">{{ commit['messageHeadline'] }}</span>
+                                - 
+                                <span style="font-style:italic; font-weight: 900; font-size: 12px;">{{ commit['committedDate'] }}</span>
+                                - 
+                                <a target="_blank" href="https://github.com/bx0-val/{{ item['name'] }}/commit/{{ commit['oid'] }}" style="font-size: 12px;">({{ commit['oid'][:7] }})</a>
+                            </li>
+                            <br>
+                            {% endfor %}
+                        </div>
+                    </details>
+                    {% endfor %}
+                </ul>
+            </article>
+        </div>
 </div>
 
-<div id="tab-content" role="tabpanel" class="tab-content">
-    <ul style="list-style: none; font-family: 'Courier New', Courier, monospace;">
-        {% for item in data %}
-        <span style="font-style: italic; font-weight: 700; font-size: 18px;"><a target="_blank" href="https://github.com/bx0-val/{{ item['name'] }}">{{ item['name'] }}</a></span> 
-        <div style="margin-top: 10px; margin-left: 25px;">
-            {% for commit in item['history']['target']['history']['nodes'] %}
-            <li>
-                <span style="font-size: 14px;">{{ commit['messageHeadline'] }}</span>
-                - 
-                <span style="font-style:italic; font-weight: 900; font-size: 12px;">{{ commit['committedDate'] }}</span>
-                - 
-                <a target="_blank" href="https://github.com/bx0-val/{{ item['name'] }}/commit/{{ commit['oid'] }}" style="font-size: 12px;">({{ commit['oid'][:7] }})</a>
-            </li>
-            <br>
-            {% endfor %}
-        </div>
-        {% endfor %}
-    </ul>
-</div>
+
+
 
