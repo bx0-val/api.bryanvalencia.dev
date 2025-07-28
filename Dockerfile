@@ -6,6 +6,8 @@ COPY main.py .
 
 COPY templates/ ./templates
 
+COPY poems/ ./poems
+
 RUN pip install "fastapi[standard]"
 
 CMD ["fastapi", "run", "main.py", "--port", "80"]
