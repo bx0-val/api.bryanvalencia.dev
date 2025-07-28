@@ -14,7 +14,7 @@
                 - 
                 <span style="font-style:italic; font-weight: 900; font-size: 12px;">{{ commit['committedDate'] }}</span>
                 - 
-                <a target="_parent" href="https://github.com/bx0-val/{{ item['name'] }}/commit/{{ commit['oid'] }}" style="font-size: 12px;">({{ commit['oid'][:7] }})</a>
+                <a target="_blank" href="https://github.com/bx0-val/{{ item['name'] }}/commit/{{ commit['oid'] }}" style="font-size: 12px;">({{ commit['oid'][:7] }})</a>
             </li>
             <br>
             {% endfor %}

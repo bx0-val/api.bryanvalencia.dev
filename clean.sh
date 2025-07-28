@@ -1,1 +1,0 @@
-docker kill prodapi && docker rm prodapi && docker rmi api
